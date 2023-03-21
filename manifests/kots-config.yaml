@@ -2,39 +2,65 @@
 apiVersion: kots.io/v1beta1
 kind: Config
 metadata:
-  name: config-sample
+  name: acme-fitness
 spec:
   groups:
-  - name: example_settings
-    title: My Example Config
-    description: Configuration to serve as an example for creating your own. See [https://kots.io/reference/v1beta1/config/](https://kots.io/reference/v1beta1/config/) for configuration docs. In this case, we provide example fields for configuring an Nginx welcome page.
+  - name: acme-fitness
+    title: Services
+    description: Configures the high-level parameters for the services
     items:
-    - name: show_text_inputs
-      title: Customize Text Inputs
-      help_text: "Show custom user text inputs"
+    - name: domain
+      title: Domain
+      help_text: "The base domain for exposed ACME fitness services"
+      type: text
+      required: true
+      default: "acme-fitness.local"
+  - name: tls
+    title: TLS
+    description: Configures TLS for the exposed services
+    - name: tls-issuer-type
+      title: Issuer Type
+      help_text: "Type of certificate issuer to use on to issue certificates"
+      type: select_one
+        items:
+        - name: issuer
+          title: Issuer
+        - name: cluster-issuer
+          title: Cluster Issuer
+    - name: tls-issuer-name
+      title: Issuer Name
+      help_text: "Which issuer/cluster issuer should to use to generate certificates"
+      type: text
+      required: true
+  - name: passwords
+    title: Passwords
+    description: "Passwords for ACME fitness data stores"
+    - name: generate-passwords
+      title: Generate Passwords?
       type: bool
-      default: "0"
-      recommended: true
-    - name: example_default_value
-      title: Text Example (with default value)
+      default: "1"
+    - name: cart-password
+      title: Cart Datastore Passowrd
+      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
       type: text
-      value: ""
-      default: please change this value
-      when: repl{{ ConfigOptionEquals "show_text_inputs" "1" }}
-    - name: api_token
-      title: API token
-      type: password
-      props:
-        rows: 5
-      when: repl{{ ConfigOptionEquals "show_text_inputs" "1" }}
-    - name: readonly_text_left
-      title: Readonly Text
+      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+    - name: catalog-password
+      title: Catalog Database Passowrd
+      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
       type: text
-      value: "{{repl RandomString 10}}"
-      readonly: true
-      when: repl{{ ConfigOptionEquals "show_text_inputs" "1" }}
-    - name: hidden_text
-      title: Secret Key
-      type: password
-      hidden: true
-      value: "{{repl RandomString 40}}"
+      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+    - name: order-password
+      title: Order Database Passowrd
+      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+      type: text
+      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+    - name: user-cache-password
+      title: User Cache Passowrd
+      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+      type: text
+      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+    - name: user-db-password
+      title: User Database Passowrd
+      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+      type: text
+      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'

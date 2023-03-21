@@ -72,16 +72,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-contour-cluster-issuer
+    kots.io/exclude: '{{repl (ConfigOptionEquals "tls-issuer-type" "cluster-issuer") }}'
+    cert-manager.io/cluster-issuer: '{{repl (ConfigOption "tls-issuer-name" ) }}'
     ingress.kubernetes.io/force-ssl-redirect: "true"
-    kubernetes.io/ingress.class: contour
   labels:
     app: acmefit
     service: frontend
   name: frontend
 spec:
   rules:
-  - host: acme-fitness.shortrib.app
+  - host: acme-fitness.{{repl ConfigOption "domain"}}
     http:
       paths:
       - backend:
@@ -93,5 +93,33 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - acme-fitness.shortrib.app
+    - acme-fitness.{{repl ConfigOption "domain"}}
+    secretName: frontend-cert
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kots.io/exclude: '{{repl (ConfigOptionEquals "tls-issuer-type" "issuer") }}'
+    cert-manager.io/issuer: '{{repl (ConfigOption "tls-issuer-name" ) }}'
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+  labels:
+    app: acmefit
+    service: frontend
+  name: frontend
+spec:
+  rules:
+  - host: acme-fitness.{{repl ConfigOption "domain"}}
+    http:
+      paths:
+      - backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - acme-fitness.{{repl ConfigOption "domain"}}
     secretName: frontend-cert
