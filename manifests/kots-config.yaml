@@ -18,15 +18,16 @@ spec:
   - name: tls
     title: TLS
     description: Configures TLS for the exposed services
+    items:
     - name: tls-issuer-type
       title: Issuer Type
       help_text: "Type of certificate issuer to use on to issue certificates"
       type: select_one
-        items:
-        - name: issuer
-          title: Issuer
-        - name: cluster-issuer
-          title: Cluster Issuer
+      items:
+      - name: issuer
+        title: Issuer
+      - name: cluster-issuer
+        title: Cluster Issuer
     - name: tls-issuer-name
       title: Issuer Name
       help_text: "Which issuer/cluster issuer should to use to generate certificates"
@@ -35,32 +36,33 @@ spec:
   - name: passwords
     title: Passwords
     description: "Passwords for ACME fitness data stores"
+    items:
     - name: generate-passwords
       title: Generate Passwords?
       type: bool
-      default: "1"
+      default: true
     - name: cart-password
       title: Cart Datastore Passowrd
-      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
-      type: text
-      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+      type: password
+      required: true
     - name: catalog-password
       title: Catalog Database Passowrd
-      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
-      type: text
-      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+      type: password
+      required: true
     - name: order-password
       title: Order Database Passowrd
-      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
-      type: text
-      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+      type: password
+      required: true
     - name: user-cache-password
       title: User Cache Passowrd
-      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
-      type: text
-      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+      type: password
+      required: true
     - name: user-db-password
       title: User Database Passowrd
-      when: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
-      type: text
-      required: '{{repl (ConfigOptionEquals "generate_passwords" "0")}}'
+      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+      type: password
+      required: true

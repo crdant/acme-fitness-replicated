@@ -64,7 +64,7 @@ metadata:
   name: pos
 spec:
   rules:
-    - host: pos.{{repl ConfigOption "domain"}}
+  - host: pos.{{repl ConfigOption "domain"}}
     http:
       paths:
       - backend:
@@ -92,7 +92,7 @@ metadata:
   name: pos
 spec:
   rules:
-    - host: pos.{{repl ConfigOption "domain"}}
+  - host: pos.{{repl ConfigOption "domain"}}
     http:
       paths:
       - backend:
