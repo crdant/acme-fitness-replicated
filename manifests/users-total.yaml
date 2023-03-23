@@ -39,7 +39,7 @@ spec:
       - name: acmefit-users-data
         emptyDir: {}
       containers:
-      - image: regisrty.shortrib.dev/acme-fitness/acmeshop-user:latest
+      - image: registry.shortrib.dev/acme-fitness/acmeshop-user:latest
         imagePullPolicy: "Always"
         name: users
         env:
