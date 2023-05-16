@@ -19,6 +19,8 @@ spec:
     - deployment/users
     - deployment/users-mongo
     - deployment/users-redis
+  replicatedRegistryDomain: registry.shortrib.io
+    # proxyRegistryDomain: proxy.shortrib.io
   ports:
     - serviceName: frontend
       servicePort: 80
