@@ -39,6 +39,7 @@ spec:
         app: acmefit
         service: order-db
     spec:
+      securityContext: repl{{ ternary (ConfigOption "pod_security_context" ) "{}" (ConfigOptionEquals "enable_pod_security" "1" ) | nindent 8 }}
       containers:
       - name: postgres
         image: postgres:9.5
