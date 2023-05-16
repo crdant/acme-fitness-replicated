@@ -37,6 +37,7 @@ spec:
         app: acmefit
         service: pos
     spec:
+      securityContext: repl{{ ternary (ConfigOption "pod_security_context" ) "{}" (ConfigOptionEquals "enable_pod_security" "1" ) | nindent 8 }}
       containers:
       - image: gcr.io/vmwarecloudadvocacy/acmeshop-pos:v0.1.0-beta
         name: pos

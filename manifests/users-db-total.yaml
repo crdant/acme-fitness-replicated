@@ -34,6 +34,7 @@ spec:
         app: acmefit  # has to match .spec.selector.matchLabels
         service: users-mongo
     spec:
+      securityContext: repl{{ ternary (ConfigOption "pod_security_context" ) "{}" (ConfigOptionEquals "enable_pod_security" "1" ) | nindent 8 }}
       containers:
         - name: users-mongo
           image: mongo:4

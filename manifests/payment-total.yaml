@@ -35,6 +35,7 @@ spec:
         app: acmefit
         service: payment
     spec:
+      securityContext: repl{{ ternary (ConfigOption "pod_security_context" ) "{}" (ConfigOptionEquals "enable_pod_security" "1" ) | nindent 8 }}
       containers:
       - image: registry.shortrib.dev/acme-fitness/acmeshop-payment:latest
         name: payment

@@ -35,6 +35,7 @@ spec:
         app: acmefit
         service: cart
     spec:
+      securityContext: repl{{ ternary (ConfigOption "pod_security_context" ) "{}" (ConfigOptionEquals "enable_pod_security" "1" ) | nindent 8 }}
       volumes:
       - name: acmefit-cart-data
         emptyDir: {}

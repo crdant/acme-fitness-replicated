@@ -15,6 +15,19 @@ spec:
       type: text
       required: true
       default: "acme-fitness.local"
+  - name: security
+    title: Security
+    description: Optional security features
+    items:
+    - name: enable_pod_security
+      type: bool
+      title: Enable Pod Security
+      default: "0"
+    - name: pod_security_context
+      title: Pod Security Context
+      help_text: "Pod security context"
+      type: textarea
+      when: '{{repl ConfigOptionEquals "enable_pod_security" "1"}}'
   - name: tls
     title: TLS
     description: Configures TLS for the exposed services
