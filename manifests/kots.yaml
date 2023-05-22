@@ -12,6 +12,7 @@ spec:
     - deployment/catalog
     - deployment/catalog-mongo
     - deployment/frontend
+    - ingress/frontend
     - deployment/order
     - deployment/order-postgres
     - deployment/payment
