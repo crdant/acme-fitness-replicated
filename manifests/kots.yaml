@@ -42,28 +42,27 @@ spec:
         # needs to match applicationUrl in kots-app.yaml
         url: "http://frontend"
 ---
----
 apiVersion: kots.io/v1beta1
 kind: Config
 metadata:
   name: acme-fitness
 spec:
   groups:
-  - name: acme-fitness
-    title: Services
-    description: Configures the high-level parameters for the services
-    items:
-    - name: domain
+    - name: acme-fitness
+      title: Services
+      description: Configures the high-level parameters for the services
+      items:
+        - name: domain
       title: Domain
       help_text: "The base domain for exposed ACME fitness services"
       type: text
       required: true
       default: "acme-fitness.local"
-  - name: security
-    title: Security
-    description: Optional security features
-    items:
-    - name: enable_pod_security
+      - name: security
+      title: Security
+      description: Optional security features
+      items:
+        - name: enable_pod_security
       type: bool
       title: Enable Pod Security
       default: "0"
@@ -72,29 +71,29 @@ spec:
       help_text: "Pod security context"
       type: textarea
       when: '{{repl ConfigOptionEquals "enable_pod_security" "1"}}'
-  - name: tls
-    title: TLS
-    description: Configures TLS for the exposed services
-    items:
-    - name: tls-issuer-type
+      - name: tls
+      title: TLS
+      description: Configures TLS for the exposed services
+      items:
+        - name: tls-issuer-type
       title: Issuer Type
       help_text: "Type of certificate issuer to use on to issue certificates"
       type: select_one
       items:
-      - name: issuer
-        title: Issuer
-      - name: cluster-issuer
-        title: Cluster Issuer
+        - name: issuer
+          title: Issuer
+    - name: cluster-issuer
+      title: Cluster Issuer
     - name: tls-issuer-name
       title: Issuer Name
       help_text: "Which issuer/cluster issuer should to use to generate certificates"
       type: text
       required: true
-  - name: passwords
-    title: Passwords
-    description: "Passwords for ACME fitness data stores"
-    items:
-    - name: generate-passwords
+      - name: passwords
+      title: Passwords
+      description: "Passwords for ACME fitness data stores"
+      items:
+        - name: generate-passwords
       title: Generate Passwords?
       type: bool
       default: true
