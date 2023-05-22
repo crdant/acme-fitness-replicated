@@ -84,11 +84,11 @@ spec:
               title: Issuer
             - name: cluster-issuer
               title: Cluster Issuer
-            - name: tls-issuer-name
-              title: Issuer Name
-              help_text: "Which issuer/cluster issuer should to use to generate certificates"
-              type: text
-              required: true
+        - name: tls-issuer-name
+          title: Issuer Name
+          help_text: "Which issuer/cluster issuer should to use to generate certificates"
+          type: text
+          required: true
     - name: passwords
       title: Passwords
       description: "Passwords for ACME fitness data stores"
