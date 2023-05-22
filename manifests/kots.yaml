@@ -53,75 +53,75 @@ spec:
       description: Configures the high-level parameters for the services
       items:
         - name: domain
-      title: Domain
-      help_text: "The base domain for exposed ACME fitness services"
-      type: text
-      required: true
-      default: "acme-fitness.local"
-      - name: security
+          title: Domain
+          help_text: "The base domain for exposed ACME fitness services"
+          type: text
+          required: true
+          default: "acme-fitness.local"
+    - name: security
       title: Security
       description: Optional security features
       items:
         - name: enable_pod_security
-      type: bool
-      title: Enable Pod Security
-      default: "0"
-    - name: pod_security_context
-      title: Pod Security Context
-      help_text: "Pod security context"
-      type: textarea
-      when: '{{repl ConfigOptionEquals "enable_pod_security" "1"}}'
-      - name: tls
+          type: bool
+          title: Enable Pod Security
+          default: "0"
+        - name: pod_security_context
+          title: Pod Security Context
+          help_text: "Pod security context"
+          type: textarea
+          when: '{{repl ConfigOptionEquals "enable_pod_security" "1"}}'
+    - name: tls
       title: TLS
       description: Configures TLS for the exposed services
       items:
         - name: tls-issuer-type
-      title: Issuer Type
-      help_text: "Type of certificate issuer to use on to issue certificates"
-      type: select_one
-      items:
-        - name: issuer
-          title: Issuer
-    - name: cluster-issuer
-      title: Cluster Issuer
-    - name: tls-issuer-name
-      title: Issuer Name
-      help_text: "Which issuer/cluster issuer should to use to generate certificates"
-      type: text
-      required: true
-      - name: passwords
+          title: Issuer Type
+          help_text: "Type of certificate issuer to use on to issue certificates"
+          type: select_one
+          items:
+            - name: issuer
+              title: Issuer
+            - name: cluster-issuer
+              title: Cluster Issuer
+            - name: tls-issuer-name
+              title: Issuer Name
+              help_text: "Which issuer/cluster issuer should to use to generate certificates"
+              type: text
+              required: true
+    - name: passwords
       title: Passwords
       description: "Passwords for ACME fitness data stores"
       items:
         - name: generate-passwords
-      title: Generate Passwords?
-      type: bool
-      default: true
-    - name: cart-password
-      title: Cart Datastore Passowrd
-      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
-      type: password
-      required: true
-    - name: catalog-password
-      title: Catalog Database Passowrd
-      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
-      type: password
-      required: true
-    - name: order-password
-      title: Order Database Passowrd
-      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
-      type: password
-      required: true
-    - name: user-cache-password
-      title: User Cache Passowrd
-      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
-      type: password
-      required: true
-    - name: user-db-password
-      title: User Database Passowrd
-      when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
-      type: password
-      required: true
+          title: Generate Passwords?
+          type: bool
+          default: true
+        - name: cart-password
+          title: Cart Datastore Passowrd
+          when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+          type: password
+          required: true
+        - name: catalog-password
+          title: Catalog Database Passowrd
+          when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+          type: password
+          required: true
+        - name: order-password
+          title: Order Database Passowrd
+          when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+          type: password
+          required: true
+        - name: user-cache-password
+          title: User Cache Passowrd
+          when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+          type: password
+          required: true
+        - name: user-db-password
+          title: User Database Passowrd
+          when: '{{repl (ConfigOptionEquals "generate-passwords" "0")}}'
+          type: password
+          required: true
 ---
 apiVersion: troubleshoot.sh/v1beta2
 kind: Preflight
