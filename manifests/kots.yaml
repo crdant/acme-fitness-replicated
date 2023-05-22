@@ -17,6 +17,7 @@ spec:
     - deployment/order-postgres
     - deployment/payment
     - deployment/pos
+    - ingress/pos
     - deployment/users
     - deployment/users-mongo
     - deployment/users-redis
