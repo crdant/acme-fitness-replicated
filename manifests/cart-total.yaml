@@ -40,7 +40,7 @@ spec:
       - name: acmefit-cart-data
         emptyDir: {}
       containers:
-      - image: registry.shortrib.dev/acme-fitness/acme-cart:latest
+      - image: registry.shortrib.dev/acme-fitness/acmeshop-cart:latest
         imagePullPolicy: "Always"
         name: cart
         env:
